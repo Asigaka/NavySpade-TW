@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Crystal : MonoBehaviour, IDisappearance, ISpawnable
+public class Crystal : MonoBehaviour, IActiveChanger, ISpawnable
 {
     [SerializeField] private int minTakenScore = 1;
     [SerializeField] private int maxTakenScore = 10;
@@ -13,9 +13,9 @@ public class Crystal : MonoBehaviour, IDisappearance, ISpawnable
     [SerializeField] private int startCount;
     [SerializeField] private int maxSpawnedCountOnMap;
 
-    private UnityEvent onDissapeare;
+    private UnityEvent onActiveChange;
 
-    public UnityEvent OnDisappeare => onDissapeare;
+    public UnityEvent OnActiveChange => onActiveChange;
     public int TakenScore { get => Random.Range(minTakenScore, maxTakenScore); }
     public int TakenHealth { get => takenHealth; }
     public float MinSpawnPeriodicity => minSpawnPeriodicity;
@@ -25,16 +25,16 @@ public class Crystal : MonoBehaviour, IDisappearance, ISpawnable
 
     private void Awake()
     {
-        onDissapeare = new UnityEvent();
+        onActiveChange = new UnityEvent();
     }
 
     private void OnEnable()
     {
-        OnDisappeare?.Invoke();
+        OnActiveChange?.Invoke();
     }
 
     private void OnDisable()
     {
-        OnDisappeare?.Invoke();
+        OnActiveChange?.Invoke();
     }
 }

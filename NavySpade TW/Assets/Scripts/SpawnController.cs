@@ -102,11 +102,11 @@ public class SpawnController : MonoBehaviour
     {
         for (int i = 0; i < spawnedObjects.Count; i++)
         {
-            IDisappearance disappearenceObj = spawnedObjects[i].GetComponent<IDisappearance>();
+            IActiveChanger disappearenceObj = spawnedObjects[i].GetComponent<IActiveChanger>();
 
             if (disappearenceObj != null)
             {
-                disappearenceObj.OnDisappeare.AddListener(OnChangeDisappearence);
+                disappearenceObj.OnActiveChange.AddListener(OnChangeDisappearence);
             }
         }
     }

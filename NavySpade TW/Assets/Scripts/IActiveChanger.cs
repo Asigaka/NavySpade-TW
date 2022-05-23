@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public interface IDisappearance 
+public interface IActiveChanger 
 {
-    public UnityEvent OnDisappeare { get; }
+    public UnityEvent OnActiveChange { get; }
 }

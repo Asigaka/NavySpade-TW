@@ -3,7 +3,7 @@ using UnityEngine.AI;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class Enemy : MonoBehaviour, IDisappearance, ISpawnable
+public class Enemy : MonoBehaviour, IActiveChanger, ISpawnable
 {
     [SerializeField] private float moveSpeed;
 
@@ -14,9 +14,9 @@ public class Enemy : MonoBehaviour, IDisappearance, ISpawnable
     [SerializeField] private int maxSpawnedCountOnMap;
 
     private NavMeshAgent agent;
-    private UnityEvent onDissapeare;
+    private UnityEvent onActiveChange;
 
-    public UnityEvent OnDisappeare => onDissapeare;
+    public UnityEvent OnActiveChange => onActiveChange;
     public float MinSpawnPeriodicity => minSpawnPeriodicity;
     public float MaxSpawnPeriodicity => maxSpawnPeriodicity;
     public int StartCount => startCount;
@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour, IDisappearance, ISpawnable
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
 
-        onDissapeare = new UnityEvent();
+        onActiveChange = new UnityEvent();
     }
 
     private void Update()
@@ -50,11 +50,11 @@ public class Enemy : MonoBehaviour, IDisappearance, ISpawnable
 
     private void OnEnable()
     {
-        OnDisappeare?.Invoke();
+        OnActiveChange?.Invoke();
     }
 
     private void OnDisable()
     {
-        OnDisappeare?.Invoke();
+        OnActiveChange?.Invoke();
     }
 }
